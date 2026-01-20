@@ -64,27 +64,17 @@ export default function GettingStarted() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 mb-2">
-                    Add SHELBYNET to Your Wallet
+                    Switch to SHELBYNET
                   </h3>
                   <p className="text-sm text-gray-600 mb-3">
-                    Open Petra Wallet → Settings (⚙️) → Network → Click <strong>"Add Custom Network"</strong>
+                    Open Petra Wallet → Click Settings (⚙️) → Select <strong>Network</strong> → Choose <strong>SHELBYNET</strong>
                   </p>
-                  <div className="bg-indigo-50 rounded-lg p-3 border border-indigo-200 mb-3">
-                    <p className="text-xs text-indigo-800 font-medium mb-2">
-                      Network Details:
-                    </p>
-                    <ul className="text-xs text-indigo-700 space-y-1">
-                      <li>• <strong>Name:</strong> SHELBYNET</li>
-                      <li>• <strong>RPC URL:</strong> https://fullnode.shelbynet.aptoslabs.com/v1</li>
-                      <li>• <strong>Chain ID:</strong> Check Shelby docs</li>
-                    </ul>
-                  </div>
-                  <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200">
-                    <p className="text-xs text-yellow-800 font-medium mb-1">
+                  <div className="bg-indigo-50 rounded-lg p-3 border border-indigo-200">
+                    <p className="text-xs text-indigo-800 font-medium mb-1">
                       💡 Important:
                     </p>
-                    <p className="text-xs text-yellow-700">
-                      Make sure you're on <strong>SHELBYNET</strong> to use the Shelby Storage app!
+                    <p className="text-xs text-indigo-700">
+                      SHELBYNET is built-in to Petra Wallet. Just switch to it from the network dropdown!
                     </p>
                   </div>
                 </div>
