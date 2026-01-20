@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect } from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { shelbyClient } from "../lib/shelby";
 
 interface FileListProps {
   files: any[];
