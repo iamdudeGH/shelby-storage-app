@@ -1,5 +1,5 @@
 {
-  "installCommand": "bash install.sh",
+  "installCommand": "npm install --force",
   "buildCommand": "npm run build",
   "framework": "vite"
 }
