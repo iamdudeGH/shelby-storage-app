@@ -62,9 +62,12 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
       setDownloading(filename);
       console.log("Downloading file:", filename);
       
-      // Download file from Shelby storage using SDK
-      const blob = await shelbyClient.getBlob(filename);
-      console.log("Downloaded blob:", blob);
+      // Download file from Shelby storage
+      const blobData = await shelbyClient.getBlobs([filename]);
+      console.log("Downloaded blob data:", blobData);
+      
+      // Convert Uint8Array to Blob
+      const blob = new Blob([blobData[0]], { type: 'application/octet-stream' });
       
       // Create download link
       const url = URL.createObjectURL(blob);
