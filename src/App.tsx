@@ -5,7 +5,7 @@ import FileUpload from "./components/FileUpload";
 import FileList from "./components/FileList";
 import FaucetInfo from "./components/FaucetInfo";
 import GettingStarted from "./components/GettingStarted";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import shelbyLogo from "./assets/shelbylogo.jpg";
 
 // Create QueryClient with optimized settings

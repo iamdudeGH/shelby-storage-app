@@ -26,7 +26,7 @@ export default function WalletSelector() {
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
           <code className="text-white font-mono text-sm">
-            {formatAddress(account.address)}
+            {formatAddress(account.address.toString())}
           </code>
         </div>
         <button

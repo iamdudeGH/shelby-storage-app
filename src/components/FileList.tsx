@@ -6,7 +6,7 @@ interface FileListProps {
 }
 
 export default function FileList({ files: uploadedFiles }: FileListProps) {
-  const { account, connected } = useWallet();
+  const { connected } = useWallet();
   const [downloading, setDownloading] = useState<string | null>(null);
   const [allFiles, setAllFiles] = useState<any[]>([]);
 
