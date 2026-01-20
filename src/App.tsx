@@ -32,8 +32,7 @@ function App() {
       <AptosWalletAdapterProvider
         autoConnect={true}
         dappConfig={{ 
-          network: Network.CUSTOM,
-          aptosConnectDappId: import.meta.env.VITE_SHELBY_API_KEY,
+          network: Network.DEVNET
         }}
         onError={(error) => {
           console.error("Wallet error:", error);
