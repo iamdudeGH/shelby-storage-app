@@ -1,5 +1,6 @@
 ﻿import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Network } from "@aptos-labs/ts-sdk";
 import WalletSelector from "./components/WalletSelector";
 import FileUpload from "./components/FileUpload";
 import FileList from "./components/FileList";
@@ -30,6 +31,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AptosWalletAdapterProvider
         autoConnect={true}
+        dappConfig={{ network: Network.SHELBYNET }}
         onError={(error) => {
           console.error("Wallet error:", error);
         }}
