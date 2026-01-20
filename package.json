@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "overrides": {
-    "@telegram-apps/bridge": "^1.9.2"
+    "@telegram-apps/bridge": "1.9.2"
+  },
+  "resolutions": {
+    "@telegram-apps/bridge": "1.9.2"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^5.2.1",
