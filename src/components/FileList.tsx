@@ -60,18 +60,26 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
   const downloadFile = async (filename: string) => {
     try {
       setDownloading(filename);
-      const response = await fetch(`http://localhost:3000/api/download/${encodeURIComponent(filename)}`);
-      if (!response.ok) throw new Error("Download failed");
+      console.log("Downloading file:", filename);
       
-      const blob = await response.blob();
+      // Download file from Shelby storage using SDK
+      const blob = await shelbyClient.getBlob(filename);
+      console.log("Downloaded blob:", blob);
+      
+      // Create download link
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
       a.download = filename;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    } catch (error) {
-      alert("Download failed");
+      
+      console.log("Download successful!");
+    } catch (error: any) {
+      console.error("Download error:", error);
+      alert(`Download failed: ${error.message || "Unknown error"}`);
     } finally {
       setDownloading(null);
     }
