@@ -71,16 +71,33 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
         account: account.address,
         blobName: filename,
       });
-      console.log("Downloaded blob data:", shelbyBlob);
+      console.log("Downloaded blob:", shelbyBlob);
       
-      if (!shelbyBlob || !shelbyBlob.data) {
+      if (!shelbyBlob || !shelbyBlob.readable) {
         throw new Error("No data received from storage");
       }
       
-      // Convert Uint8Array to Blob
-      const blob = new Blob([shelbyBlob.data], { type: 'application/octet-stream' });
+      // Read the stream into a Uint8Array
+      const reader = shelbyBlob.readable.getReader();
+      const chunks: Uint8Array[] = [];
       
-      // Create download link
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+      }
+      
+      // Combine all chunks into a single Uint8Array
+      const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+      const blobData = new Uint8Array(totalLength);
+      let offset = 0;
+      for (const chunk of chunks) {
+        blobData.set(chunk, offset);
+        offset += chunk.length;
+      }
+      
+      // Convert to Blob and download
+      const blob = new Blob([blobData], { type: 'application/octet-stream' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
