@@ -10,6 +10,7 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
   const { connected, account } = useWallet();
   const [downloading, setDownloading] = useState<string | null>(null);
   const [allFiles, setAllFiles] = useState<any[]>([]);
+  const [copiedFile, setCopiedFile] = useState<string | null>(null);
 
   // Simple: Just use localStorage + uploadedFiles
   useEffect(() => {
@@ -55,6 +56,27 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
     const sizes = ["B", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round((bytes / Math.pow(k, i)) * 10) / 10 + " " + sizes[i];
+  };
+
+  const copyShareLink = async (filename: string) => {
+    try {
+      if (!account) {
+        alert("Wallet not connected");
+        return;
+      }
+
+      // Generate shareable link - format: https://your-app.vercel.app/file/{account}/{filename}
+      const shareUrl = `${window.location.origin}/file/${account.address}/${encodeURIComponent(filename)}`;
+      
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiedFile(filename);
+      
+      // Reset copied state after 2 seconds
+      setTimeout(() => setCopiedFile(null), 2000);
+    } catch (error) {
+      console.error("Failed to copy link:", error);
+      alert("Failed to copy link to clipboard");
+    }
   };
 
   const downloadFile = async (filename: string) => {
@@ -180,33 +202,61 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => downloadFile(file.name)}
-                disabled={downloading === file.name}
-                className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 border border-blue-400/20"
-              >
-                {downloading === file.name ? (
-                  <>
-                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span className="text-sm">Downloading...</span>
-                  </>
-                ) : (
-                  <>
-                    <svg 
-                      className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-y-0.5" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                    </svg>
-                    <span className="text-sm">Download</span>
-                  </>
-                )}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => copyShareLink(file.name)}
+                  className="group/share relative flex items-center gap-2 bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 hover:from-purple-600 hover:via-purple-700 hover:to-purple-800 text-white px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 border border-purple-400/20"
+                  title="Copy shareable link"
+                >
+                  {copiedFile === file.name ? (
+                    <>
+                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg 
+                        className="h-5 w-5 transition-transform duration-300 group-hover/share:rotate-12" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                      </svg>
+                      <span className="text-sm">Share</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={() => downloadFile(file.name)}
+                  disabled={downloading === file.name}
+                  className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 border border-blue-400/20"
+                >
+                  {downloading === file.name ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span className="text-sm">Downloading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg 
+                        className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-y-0.5" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                      </svg>
+                      <span className="text-sm">Download</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           ))}
         </div>
