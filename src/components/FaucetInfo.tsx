@@ -15,14 +15,14 @@ export default function FaucetInfo() {
 
       <div className="space-y-6">
         {/* Info Section */}
-        <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200">
+        <div className="bg-zinc-900/50 rounded-xl p-6 border border-pink-500/30">
           <div className="flex items-start gap-4">
             <span className="text-4xl">🚰</span>
             <div className="flex-1">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
+              <h3 className="text-lg font-bold text-white mb-2">
                 Need Tokens for Testing?
               </h3>
-              <p className="text-sm text-gray-700 mb-4">
+              <p className="text-sm text-gray-300 mb-4">
                 To test file uploads and other features on Shelby Storage, you'll need both APT tokens (for gas fees) and ShelbyUSD tokens (for storage payments).
                 Get free test tokens from the official Shelby faucets!
               </p>
@@ -59,17 +59,17 @@ export default function FaucetInfo() {
         </div>
 
         {/* Instructions */}
-        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+        <div className="bg-pink-500/10 rounded-xl p-4 border border-pink-500/30">
           <div className="flex items-start gap-3">
             <span className="text-2xl">ℹ️</span>
             <div>
-              <p className="text-sm text-gray-700 font-medium mb-2">
+              <p className="text-sm text-gray-200 font-medium mb-2">
                 How to Get Tokens:
               </p>
-              <ol className="text-xs text-gray-600 space-y-2 list-decimal list-inside">
+              <ol className="text-xs text-gray-300 space-y-2 list-decimal list-inside">
                 <li>Click the buttons above to visit the Shelby documentation</li>
-                <li>Follow the instructions to get <strong>APT tokens</strong> (for gas fees)</li>
-                <li>Then get <strong>ShelbyUSD tokens</strong> (for storage payments)</li>
+                <li>Follow the instructions to get <strong className="text-white">APT tokens</strong> (for gas fees)</li>
+                <li>Then get <strong className="text-white">ShelbyUSD tokens</strong> (for storage payments)</li>
                 <li>Come back and start uploading files!</li>
               </ol>
             </div>
@@ -78,28 +78,28 @@ export default function FaucetInfo() {
 
         {/* Additional Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+          <div className="bg-zinc-900/50 rounded-xl p-4 border border-pink-500/30">
             <div className="flex items-start gap-3">
               <span className="text-2xl">💎</span>
               <div>
-                <p className="text-sm text-gray-800 font-medium mb-1">
+                <p className="text-sm text-white font-medium mb-1">
                   APT Tokens
                 </p>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-gray-400">
                   Aptos native cryptocurrency used for transaction fees (gas) on the network.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+          <div className="bg-zinc-900/50 rounded-xl p-4 border border-pink-500/30">
             <div className="flex items-start gap-3">
               <span className="text-2xl">💵</span>
               <div>
-                <p className="text-sm text-gray-800 font-medium mb-1">
+                <p className="text-sm text-white font-medium mb-1">
                   ShelbyUSD Tokens
                 </p>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-gray-400">
                   Stablecoin used on Shelby network for storage payments and transactions.
                 </p>
               </div>
