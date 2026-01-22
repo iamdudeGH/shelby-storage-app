@@ -4,10 +4,10 @@ export default function GettingStarted() {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+    <div className="bg-white rounded-2xl shadow-lg p-8 border border-pink-200">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>

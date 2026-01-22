@@ -139,9 +139,9 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
   const isUploading = uploadBlobs.isPending || progress > 0;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
+    <div className="bg-white rounded-2xl shadow-lg p-8 border border-pink-200 hover:shadow-xl transition-shadow">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+        <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg">
           <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
           </svg>
@@ -177,19 +177,19 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
             <input
               type="file"
               onChange={handleFileChange}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-gray-50 disabled:cursor-not-allowed transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-100 disabled:bg-gray-50 disabled:cursor-not-allowed transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100 cursor-pointer"
               required
               disabled={isUploading || !connected}
             />
           </div>
           {file && (
-            <div className="mt-3 p-3 bg-indigo-50 rounded-lg border border-indigo-100">
+            <div className="mt-3 p-3 bg-pink-50 rounded-lg border border-pink-100">
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <p className="text-sm font-medium text-indigo-900">
-                  {file.name} <span className="text-indigo-600">({(file.size / 1024).toFixed(2)} KB)</span>
+                <p className="text-sm font-medium text-pink-900">
+                  {file.name} <span className="text-pink-600">({(file.size / 1024).toFixed(2)} KB)</span>
                 </p>
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
             value={remotePath}
             onChange={(e) => setRemotePath(e.target.value)}
             placeholder="my-awesome-file.txt"
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-gray-50 transition-all"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-100 disabled:bg-gray-50 transition-all"
             disabled={isUploading || !connected}
           />
         </div>
@@ -218,7 +218,7 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
             type="text"
             value={expiration}
             onChange={(e) => setExpiration(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-gray-50 transition-all"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-100 disabled:bg-gray-50 transition-all"
             disabled={isUploading || !connected}
           />
           <p className="mt-2 text-xs text-gray-500">Example: "in 30 days" or "in 1 year"</p>
@@ -227,7 +227,7 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
         <button
           type="submit"
           disabled={isUploading || !file || !connected}
-          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3.5 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+          className="w-full bg-gradient-to-r from-pink-600 to-fuchsia-600 hover:from-pink-700 hover:to-fuchsia-700 text-white font-bold py-3.5 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
         >
           {!connected ? (
             <>
@@ -259,11 +259,11 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
         <div className="mt-6 space-y-2">
           <div className="flex items-center justify-between text-sm">
             <span className="font-medium text-gray-700">Upload Progress</span>
-            <span className="font-bold text-indigo-600">{progress}%</span>
+            <span className="font-bold text-pink-600">{progress}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 h-2.5 rounded-full transition-all duration-500 ease-out"
+              className="bg-gradient-to-r from-pink-600 to-fuchsia-600 h-2.5 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>

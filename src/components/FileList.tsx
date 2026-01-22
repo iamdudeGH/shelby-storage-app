@@ -140,9 +140,9 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
 
   if (!connected) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+      <div className="bg-white rounded-2xl shadow-lg p-8 border border-pink-200">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
@@ -165,10 +165,10 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
+    <div className="bg-white rounded-2xl shadow-lg p-8 border border-pink-200 hover:shadow-xl transition-shadow">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
@@ -182,8 +182,8 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
 
       {allFiles.length === 0 ? (
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-10 h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-20 h-20 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-10 h-10 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
           </div>
@@ -195,11 +195,11 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
           {allFiles.map((file, i) => (
             <div
               key={`${file.name}-${i}`}
-              className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-200 group border border-gray-200 hover:border-indigo-300 hover:shadow-md"
+              className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white hover:from-pink-50 hover:to-fuchsia-50 rounded-xl transition-all duration-200 group border border-gray-200 hover:border-pink-300 hover:shadow-md"
             >
               <div className="flex items-center gap-4 flex-1 min-w-0">
-                <div className="w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-gradient-to-br from-pink-100 to-fuchsia-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -215,7 +215,7 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
               <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   onClick={() => copyShareLink(file.name)}
-                  className="group/share relative flex items-center gap-2 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+                  className="group/share relative flex items-center gap-2 bg-gradient-to-br from-fuchsia-500 to-pink-500 hover:from-fuchsia-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
                   title="Copy shareable link"
                 >
                   {copiedFile === file.name ? (
@@ -242,7 +242,7 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
                 <button
                   onClick={() => downloadFile(file.name)}
                   disabled={downloading === file.name}
-                  className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+                  className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
                 >
                   {downloading === file.name ? (
                     <>
