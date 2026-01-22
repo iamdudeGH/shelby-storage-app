@@ -1,6 +1,5 @@
 ﻿import { useState, useEffect } from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-import { useGetBlobs } from "@shelby-protocol/react";
 import { shelbyClient } from "../lib/shelby";
 
 interface FileListProps {
@@ -8,10 +7,9 @@ interface FileListProps {
 }
 
 export default function FileList({ files: uploadedFiles }: FileListProps) {
-  const { connected, account, signAndSubmitTransaction } = useWallet();
+  const { connected, account } = useWallet();
   const [downloading, setDownloading] = useState<string | null>(null);
   const [allFiles, setAllFiles] = useState<any[]>([]);
-  const getBlobs = useGetBlobs({ client: shelbyClient });
 
   // Simple: Just use localStorage + uploadedFiles
   useEffect(() => {
@@ -64,26 +62,23 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
       setDownloading(filename);
       console.log("Downloading file from Shelby:", filename);
       
-      if (!account || !signAndSubmitTransaction) {
+      if (!account) {
         throw new Error("Wallet not connected properly");
       }
       
-      // Download file from Shelby storage using React hook with signer
-      const result = await getBlobs.mutateAsync({ 
-        blobNames: [filename],
-        signer: {
-          account: account.address,
-          signAndSubmitTransaction,
-        }
+      // Download file from Shelby storage using SDK client
+      const shelbyBlob = await shelbyClient.download({
+        account: account.address,
+        blobName: filename,
       });
-      console.log("Downloaded blob data:", result);
+      console.log("Downloaded blob data:", shelbyBlob);
       
-      if (!result || result.length === 0) {
+      if (!shelbyBlob || !shelbyBlob.data) {
         throw new Error("No data received from storage");
       }
       
       // Convert Uint8Array to Blob
-      const blob = new Blob([result[0]], { type: 'application/octet-stream' });
+      const blob = new Blob([shelbyBlob.data], { type: 'application/octet-stream' });
       
       // Create download link
       const url = URL.createObjectURL(blob);
