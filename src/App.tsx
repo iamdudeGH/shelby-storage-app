@@ -48,54 +48,64 @@ function App() {
           <Route 
             path="*" 
             element={
-              <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900">
+              <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
                 {/* Hero Header */}
-                <div className="backdrop-blur-sm bg-black/20 border-b-2 border-gray-700/50">
-                  <div className="container mx-auto px-4 py-6">
+                <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 backdrop-blur-md bg-white/95">
+                  <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <img 
                           src={shelbyLogo} 
                           alt="Shelby Logo" 
-                          className="w-16 h-16 rounded-xl shadow-2xl border-2 border-gray-700"
+                          className="w-14 h-14 rounded-2xl shadow-lg border-2 border-indigo-100 hover:scale-105 transition-transform"
                         />
                         <div>
-                          <h1 className="text-3xl font-bold text-white drop-shadow-lg">
+                          <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                             Shelby Storage
                           </h1>
-                          <p className="text-gray-300 text-sm">
-                            Decentralized file storage on Aptos
+                          <p className="text-gray-600 text-sm font-medium">
+                            Decentralized Cloud Storage on Aptos
                           </p>
                         </div>
                       </div>
                       <WalletSelector />
                     </div>
                   </div>
-                </div>
+                </header>
 
                 {/* Main Content */}
-                <div className="container mx-auto px-4 py-8">
-                  {/* Getting Started Section */}
-                  <div className="mb-8">
-                    <GettingStarted />
+                <main className="container mx-auto px-4 py-8 space-y-8">
+                  {/* Hero Banner */}
+                  <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 text-white shadow-2xl">
+                    <div className="max-w-3xl">
+                      <h2 className="text-4xl font-bold mb-3">
+                        Welcome to Decentralized Storage 🚀
+                      </h2>
+                      <p className="text-indigo-100 text-lg leading-relaxed">
+                        Store your files securely on the blockchain. Upload, share, and access your data from anywhere with complete ownership and privacy.
+                      </p>
+                    </div>
                   </div>
+
+                  {/* Getting Started Section */}
+                  <GettingStarted />
 
                   {/* Faucet Info Section */}
-                  <div className="mb-8">
-                    <FaucetInfo />
-                  </div>
+                  <FaucetInfo />
 
                   {/* File Management Section */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                     <FileUpload onUploadSuccess={handleUploadSuccess} />
                     <FileList files={uploadedFiles} />
                   </div>
 
                   {/* Footer */}
-                  <footer className="text-center mt-12 text-white/80 text-sm">
-                    <p>Powered by Shelby Protocol • Built with ❤️</p>
+                  <footer className="text-center pt-8 pb-4 text-gray-600 text-sm border-t border-gray-200 mt-12">
+                    <p className="font-medium">
+                      Powered by <span className="text-indigo-600 font-bold">Shelby Protocol</span> • Built with ❤️ on Aptos
+                    </p>
                   </footer>
-                </div>
+                </main>
               </div>
             } 
           />

@@ -140,72 +140,82 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
 
   if (!connected) {
     return (
-      <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border-2 border-gray-200">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">📁 Your Files</h2>
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">🔐</div>
-          <p className="text-gray-500">Connect wallet to view files</p>
+      <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Your Files</h2>
+            <p className="text-sm text-gray-600">Manage your stored files</p>
+          </div>
+        </div>
+        <div className="text-center py-16">
+          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <p className="text-gray-600 font-medium">Connect wallet to view your files</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border-2 border-gray-200">
+    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">📁 Your Files</h2>
-        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold border border-gray-300">
-          {allFiles.length}
-        </span>
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Your Files</h2>
+            <p className="text-sm text-gray-600">{allFiles.length} file{allFiles.length !== 1 ? 's' : ''} stored</p>
+          </div>
+        </div>
       </div>
 
       {allFiles.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">📂</div>
-          <p className="text-gray-500 text-lg">No files yet</p>
-          <p className="text-gray-400 text-sm mt-2">Upload your first file!</p>
-          
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg text-left border border-blue-200">
-            <p className="text-sm text-blue-800 font-semibold mb-2">🔍 Debug Info:</p>
-            <p className="text-xs text-blue-700">
-              Check browser console (F12) for localStorage data
-            </p>
-            <button
-              onClick={() => {
-                const stored = localStorage.getItem('shelbyUploadedFiles');
-                console.log('=== STORAGE DEBUG ===');
-                console.log('Raw:', stored);
-                console.log('Parsed:', stored ? JSON.parse(stored) : null);
-                alert('Check console for debug info!');
-              }}
-              className="mt-2 bg-blue-200 hover:bg-blue-300 px-3 py-1 rounded text-xs transition-all"
-            >
-              Show localStorage in Console
-            </button>
+        <div className="text-center py-16">
+          <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-10 h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
           </div>
+          <p className="text-gray-700 text-lg font-semibold mb-2">No files yet</p>
+          <p className="text-gray-500 text-sm">Upload your first file to get started!</p>
         </div>
       ) : (
-        <div className="space-y-2 max-h-[500px] overflow-y-auto pr-2">
+        <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
           {allFiles.map((file, i) => (
             <div
               key={`${file.name}-${i}`}
-              className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all group border border-gray-200 hover:border-gray-400"
+              className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-200 group border border-gray-200 hover:border-indigo-300 hover:shadow-md"
             >
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <span className="text-2xl">📄</span>
+              <div className="flex items-center gap-4 flex-1 min-w-0">
+                <div className="w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900 truncate" title={file.name}>
+                  <p className="font-semibold text-gray-900 truncate text-sm" title={file.name}>
                     {file.name}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 mt-0.5">
                     {formatFileSize(file.size)} • {new Date(file.uploadedAt).toLocaleDateString()}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   onClick={() => copyShareLink(file.name)}
-                  className="group/share relative flex items-center gap-2 bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 hover:from-purple-600 hover:via-purple-700 hover:to-purple-800 text-white px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 border border-purple-400/20"
+                  className="group/share relative flex items-center gap-2 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
                   title="Copy shareable link"
                 >
                   {copiedFile === file.name ? (
@@ -232,7 +242,7 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
                 <button
                   onClick={() => downloadFile(file.name)}
                   disabled={downloading === file.name}
-                  className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 border border-blue-400/20"
+                  className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
                 >
                   {downloading === file.name ? (
                     <>
@@ -261,11 +271,6 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
           ))}
         </div>
       )}
-
-      <div className="mt-4 p-3 bg-gray-50 rounded-lg text-xs border border-gray-200">
-        <strong className="text-gray-800">Debug:</strong> Uploaded Files Prop: {uploadedFiles.length}, 
-        All Files: {allFiles.length}
-      </div>
     </div>
   );
 }

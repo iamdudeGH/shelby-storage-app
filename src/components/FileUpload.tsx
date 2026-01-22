@@ -139,93 +139,153 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
   const isUploading = uploadBlobs.isPending || progress > 0;
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border-2 border-gray-200">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">📤 Upload File</h2>
+    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+          </svg>
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Upload File</h2>
+          <p className="text-sm text-gray-600">Store your files on blockchain</p>
+        </div>
+      </div>
 
       {!connected && (
-        <div className="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg">
-          <div className="flex items-center">
-            <span className="text-2xl mr-3">🔐</span>
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+          <div className="flex items-start gap-3">
+            <svg className="w-5 h-5 text-amber-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
             <div>
-              <p className="font-semibold text-yellow-800">Wallet Required</p>
-              <p className="text-sm text-yellow-700 mt-1">
-                Connect your Petra Wallet to upload files.
+              <p className="font-semibold text-amber-900">Wallet Required</p>
+              <p className="text-sm text-amber-700 mt-1">
+                Connect your Petra Wallet to start uploading files.
               </p>
             </div>
           </div>
         </div>
       )}
 
-      <form onSubmit={(e) => { e.preventDefault(); handleUpload(); }} className="space-y-4">
+      <form onSubmit={(e) => { e.preventDefault(); handleUpload(); }} className="space-y-5">
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">
-            Select File
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Choose File
           </label>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-gray-700 disabled:bg-gray-100"
-            required
-            disabled={isUploading || !connected}
-          />
+          <div className="relative">
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-gray-50 disabled:cursor-not-allowed transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
+              required
+              disabled={isUploading || !connected}
+            />
+          </div>
           {file && (
-            <p className="mt-2 text-sm text-gray-600">
-              {file.name} ({(file.size / 1024).toFixed(2)} KB)
-            </p>
+            <div className="mt-3 p-3 bg-indigo-50 rounded-lg border border-indigo-100">
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p className="text-sm font-medium text-indigo-900">
+                  {file.name} <span className="text-indigo-600">({(file.size / 1024).toFixed(2)} KB)</span>
+                </p>
+              </div>
+            </div>
           )}
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">
-            File Name
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            File Name (Optional)
           </label>
           <input
             type="text"
             value={remotePath}
             onChange={(e) => setRemotePath(e.target.value)}
-            placeholder="my-file.txt"
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-gray-700 disabled:bg-gray-100"
+            placeholder="my-awesome-file.txt"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-gray-50 transition-all"
             disabled={isUploading || !connected}
           />
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">
-            Expiration
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Expiration Period
           </label>
           <input
             type="text"
             value={expiration}
             onChange={(e) => setExpiration(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-gray-700 disabled:bg-gray-100"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-gray-50 transition-all"
             disabled={isUploading || !connected}
           />
+          <p className="mt-2 text-xs text-gray-500">Example: "in 30 days" or "in 1 year"</p>
         </div>
 
         <button
           type="submit"
           disabled={isUploading || !file || !connected}
-          className="w-full bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold py-3 rounded-lg transition-all disabled:opacity-50 shadow-lg hover:shadow-xl"
+          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3.5 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
         >
-          {!connected ? "🔐 Connect Wallet" : isUploading ? "⏳ Uploading..." : "🚀 Upload"}
+          {!connected ? (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              Connect Wallet First
+            </>
+          ) : isUploading ? (
+            <>
+              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Uploading to Blockchain...
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              Upload to Blockchain
+            </>
+          )}
         </button>
       </form>
 
       {isUploading && (
-        <div className="mt-6">
-          <div className="w-full bg-gray-200 rounded-full h-3">
+        <div className="mt-6 space-y-2">
+          <div className="flex items-center justify-between text-sm">
+            <span className="font-medium text-gray-700">Upload Progress</span>
+            <span className="font-bold text-indigo-600">{progress}%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-gray-700 to-gray-900 h-3 rounded-full transition-all"
+              className="bg-gradient-to-r from-indigo-600 to-purple-600 h-2.5 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-center text-sm text-gray-600 mt-2">{progress}%</p>
         </div>
       )}
 
       {message && (
-        <div className={`mt-4 p-4 rounded-lg border-l-4 ${message.type === "success" ? "bg-green-50 border-green-500 text-green-800" : "bg-red-50 border-red-500 text-red-800"}`}>
-          {message.type === "success" ? "✅" : "❌"} {message.text}
+        <div className={`mt-4 p-4 rounded-xl border ${message.type === "success" ? "bg-emerald-50 border-emerald-200" : "bg-red-50 border-red-200"}`}>
+          <div className="flex items-start gap-3">
+            {message.type === "success" ? (
+              <svg className="w-5 h-5 text-emerald-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5 text-red-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+            <p className={`text-sm font-medium ${message.type === "success" ? "text-emerald-800" : "text-red-800"}`}>
+              {message.text}
+            </p>
+          </div>
         </div>
       )}
     </div>

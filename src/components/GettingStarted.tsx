@@ -4,17 +4,24 @@ export default function GettingStarted() {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border-2 border-blue-200">
+    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <span className="text-3xl">🚀</span>
-          <h2 className="text-2xl font-bold text-gray-800">Getting Started</h2>
+          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Getting Started</h2>
+            <p className="text-sm text-gray-600">Quick setup guide</p>
+          </div>
         </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-gray-600 hover:text-gray-800 transition-colors"
+          className="text-gray-500 hover:text-gray-700 transition-colors font-medium text-sm px-4 py-2 rounded-lg hover:bg-gray-100"
         >
-          {isExpanded ? "▼ Collapse" : "▶ Expand"}
+          {isExpanded ? "Hide" : "Show"}
         </button>
       </div>
 
