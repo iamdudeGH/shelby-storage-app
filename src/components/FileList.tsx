@@ -140,74 +140,74 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
 
   if (!connected) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg p-8 border border-pink-200">
+      <div className="bg-zinc-800/50 backdrop-blur-sm rounded-2xl shadow-lg shadow-pink-500/10 p-8 border border-pink-500/20">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg shadow-pink-500/50">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Your Files</h2>
-            <p className="text-sm text-gray-600">Manage your stored files</p>
+            <h2 className="text-2xl font-bold text-white">Your Files</h2>
+            <p className="text-sm text-gray-400">Manage your stored files</p>
           </div>
         </div>
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-20 h-20 bg-zinc-700/50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <p className="text-gray-600 font-medium">Connect wallet to view your files</p>
+          <p className="text-gray-400 font-medium">Connect wallet to view your files</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 border border-pink-200 hover:shadow-xl transition-shadow">
+    <div className="bg-zinc-800/50 backdrop-blur-sm rounded-2xl shadow-lg shadow-pink-500/10 p-8 border border-pink-500/20 hover:border-pink-500/40 hover:shadow-xl hover:shadow-pink-500/20 transition-all">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-lg shadow-pink-500/50">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Your Files</h2>
-            <p className="text-sm text-gray-600">{allFiles.length} file{allFiles.length !== 1 ? 's' : ''} stored</p>
+            <h2 className="text-2xl font-bold text-white">Your Files</h2>
+            <p className="text-sm text-gray-400">{allFiles.length} file{allFiles.length !== 1 ? 's' : ''} stored</p>
           </div>
         </div>
       </div>
 
       {allFiles.length === 0 ? (
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20 bg-pink-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-10 h-10 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
           </div>
-          <p className="text-gray-700 text-lg font-semibold mb-2">No files yet</p>
-          <p className="text-gray-500 text-sm">Upload your first file to get started!</p>
+          <p className="text-gray-200 text-lg font-semibold mb-2">No files yet</p>
+          <p className="text-gray-400 text-sm">Upload your first file to get started!</p>
         </div>
       ) : (
         <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
           {allFiles.map((file, i) => (
             <div
               key={`${file.name}-${i}`}
-              className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white hover:from-pink-50 hover:to-fuchsia-50 rounded-xl transition-all duration-200 group border border-gray-200 hover:border-pink-300 hover:shadow-md"
+              className="flex items-center justify-between p-4 bg-zinc-900/50 hover:bg-zinc-900/80 rounded-xl transition-all duration-200 group border border-zinc-700 hover:border-pink-500/50 hover:shadow-md hover:shadow-pink-500/10"
             >
               <div className="flex items-center gap-4 flex-1 min-w-0">
-                <div className="w-10 h-10 bg-gradient-to-br from-pink-100 to-fuchsia-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-gradient-to-br from-pink-500/20 to-fuchsia-500/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-pink-500/30">
+                  <svg className="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-gray-900 truncate text-sm" title={file.name}>
+                  <p className="font-semibold text-gray-100 truncate text-sm" title={file.name}>
                     {file.name}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-gray-400 mt-0.5">
                     {formatFileSize(file.size)} • {new Date(file.uploadedAt).toLocaleDateString()}
                   </p>
                 </div>
