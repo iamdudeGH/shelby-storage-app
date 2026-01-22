@@ -62,7 +62,7 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
   const downloadFile = async (filename: string) => {
     try {
       setDownloading(filename);
-      console.log("Downloading file:", filename);
+      console.log("Downloading file from Shelby:", filename);
       
       if (!account || !signAndSubmitTransaction) {
         throw new Error("Wallet not connected properly");
