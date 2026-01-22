@@ -183,9 +183,29 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
               <button
                 onClick={() => downloadFile(file.name)}
                 disabled={downloading === file.name}
-                className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all disabled:opacity-50 shadow-md hover:shadow-lg"
+                className="group/btn relative flex items-center gap-2 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 border border-blue-400/20"
               >
-                {downloading === file.name ? "⏳" : "⬇️"}
+                {downloading === file.name ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span className="text-sm">Downloading...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg 
+                      className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-y-0.5" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                    </svg>
+                    <span className="text-sm">Download</span>
+                  </>
+                )}
               </button>
             </div>
           ))}
