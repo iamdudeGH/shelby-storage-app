@@ -8,9 +8,10 @@ interface FileListProps {
 }
 
 export default function FileList({ files: uploadedFiles }: FileListProps) {
-  const { connected } = useWallet();
+  const { connected, account, signAndSubmitTransaction } = useWallet();
   const [downloading, setDownloading] = useState<string | null>(null);
   const [allFiles, setAllFiles] = useState<any[]>([]);
+  const getBlobs = useGetBlobs({ client: shelbyClient });
 
   // Simple: Just use localStorage + uploadedFiles
   useEffect(() => {
@@ -63,12 +64,26 @@ export default function FileList({ files: uploadedFiles }: FileListProps) {
       setDownloading(filename);
       console.log("Downloading file:", filename);
       
-      // Download file from Shelby storage
-      const blobData = await shelbyClient.getBlobs([filename]);
-      console.log("Downloaded blob data:", blobData);
+      if (!account || !signAndSubmitTransaction) {
+        throw new Error("Wallet not connected properly");
+      }
+      
+      // Download file from Shelby storage using React hook with signer
+      const result = await getBlobs.mutateAsync({ 
+        blobNames: [filename],
+        signer: {
+          account: account.address,
+          signAndSubmitTransaction,
+        }
+      });
+      console.log("Downloaded blob data:", result);
+      
+      if (!result || result.length === 0) {
+        throw new Error("No data received from storage");
+      }
       
       // Convert Uint8Array to Blob
-      const blob = new Blob([blobData[0]], { type: 'application/octet-stream' });
+      const blob = new Blob([result[0]], { type: 'application/octet-stream' });
       
       // Create download link
       const url = URL.createObjectURL(blob);
